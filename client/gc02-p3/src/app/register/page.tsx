@@ -35,7 +35,6 @@ export default function Page() {
       console.log("Registration successful!");
       router.push("/login");
     } catch (error) {
-      console.log(error);
      if (axios.isAxiosError(error) && error.response) {
        Swal.fire({
          icon: "error",

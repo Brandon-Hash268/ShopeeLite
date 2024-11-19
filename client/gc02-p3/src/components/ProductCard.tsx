@@ -7,7 +7,7 @@ export async function ProductCard({ product }: { product: product }) {
   return (
     <div
       className="card bg-base-100 shadow-xl relative flex flex-col justify-between"
-      style={{ width: "280px", height: "380px" }} // Fixed size for all cards
+      style={{ width: "280px", height: "380px" }} 
     >
       <link
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -20,7 +20,7 @@ export async function ProductCard({ product }: { product: product }) {
           className="object-cover w-full h-full"
         />
         {/* Heart icon */}
-        <WishList />
+        <WishList productId={product._id} />
       </figure>
       <div className="card-body flex flex-col">
         <h2 className="card-title truncate">{product.name}</h2>
