@@ -8,11 +8,17 @@ export function Banner() {
   const [index,setIndex] = useState(0)
   const banners = [banner, banner2];
 
+  const handleBanner = ()=>{
+    if (index == 0) {
+      setIndex(1);
+    } else {
+      setIndex(0);
+    }
+  }
+
   return (
     <>
-      <div
-        style={{ position: "relative", width: "1050px", overflow: "hidden" }}
-      >
+      <div style={{ position: "relative", width: "950px", overflow: "hidden" }}>
         {/* Display Current Image */}
         <Image
           src={banners[index]}
@@ -22,7 +28,7 @@ export function Banner() {
 
         {/* Navigation Buttons */}
         <button
-          onClick={() => setIndex(1)}
+          onClick={handleBanner}
           style={{
             position: "absolute",
             top: "50%",
@@ -39,7 +45,7 @@ export function Banner() {
         </button>
 
         <button
-          onClick={() => setIndex(0)}
+          onClick={handleBanner}
           style={{
             position: "absolute",
             top: "50%",
