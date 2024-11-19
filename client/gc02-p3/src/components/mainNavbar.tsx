@@ -4,6 +4,10 @@ import Link from "next/link";
 export function MainNavbar() {
   return (
     <div className="navbar bg-shopee">
+      <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        rel="stylesheet"
+      />
       <div className="flex-1">
         <Link href="/" className="btn btn-ghost text-xl">
           <Image src={logo} alt="logo" width={130} />

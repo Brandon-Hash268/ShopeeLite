@@ -1,3 +1,4 @@
+'use client'
 export function SearchBar() {
     return (
       <label className="input input-bordered flex items-center gap-2">
