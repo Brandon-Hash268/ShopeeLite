@@ -1,5 +1,5 @@
-
-export function Footer() {
+'use server'
+export async function Footer() {
   return (
     <footer className="bg-gray-900 text-white py-8 contain-inline-size">
       <div className="container mx-auto px-4">

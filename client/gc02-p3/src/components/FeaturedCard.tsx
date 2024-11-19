@@ -1,8 +1,8 @@
-"use client";
+"use sever";
 
 import { WishList } from "./WishList";
 
-export function FeaturedCard() {
+export async function FeaturedCard() {
   return (
     <div className="card bg-base-100 w-auto shadow-xl relative">
       <link

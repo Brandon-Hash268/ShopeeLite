@@ -24,7 +24,7 @@ export default async function Home() {
       >
         <div className="flex justify-between">
           <h1 className="text-xl font-bold mb-4">Newest Item!</h1>
-          <Link href="#">
+          <Link href="products">
             <h1 className="text-xl font-bold mb-4">See All -{">"}</h1>
           </Link>
         </div>

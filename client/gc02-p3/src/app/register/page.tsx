@@ -5,7 +5,7 @@ import { ResgiterNavbar } from "../../components/navbar";
 
 export default function Page() {
   return (
-    <div>
+    <div className=" bg-shopee h-[800px]">
       <ResgiterNavbar />
 
       <div className="flex justify-center content-center bg-shopee h-screen pt-20 ">

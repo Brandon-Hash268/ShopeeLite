@@ -1,5 +1,6 @@
 import Image from "next/image";
 import logo from "../app/images/image.png"
+import Link from "next/link";
 
 
 export function ResgiterNavbar() {
@@ -7,14 +8,14 @@ export function ResgiterNavbar() {
     return (
       <div className="navbar bg-base-100 ">
         <div className="flex-1">
-          <a className="btn btn-ghost text-xl">
+          <Link href="/" className="btn btn-ghost text-xl">
             <Image
               src={logo}
               alt="logo"
               width={130}
               style={{ background: "none" }}
             />
-          </a>
+          </Link>
         </div>
         <div className="flex-none">
           <button className="btn btn-square btn-ghost">
