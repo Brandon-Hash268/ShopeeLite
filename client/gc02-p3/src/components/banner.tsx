@@ -1,11 +1,60 @@
+"use client";
 import Image from "next/image";
-import banner from "../app/images/shopeeBanner.jpg"
-
+import banner from "../app/images/shopeeBanner.jpg";
+import banner2 from "../app/images/banner2.jpg";
+import { useState } from "react";
 
 export function Banner() {
-    return(
-        <>
-        <Image src={banner} alt="banner" width={1000}/>
-        </>
-    )
+  const [index,setIndex] = useState(0)
+  const banners = [banner, banner2];
+
+  return (
+    <>
+      <div
+        style={{ position: "relative", width: "1050px", overflow: "hidden" }}
+      >
+        {/* Display Current Image */}
+        <Image
+          src={banners[index]}
+          alt={`Slide ${index + 1}`}
+          style={{ width: "100%", transition: "transform 0.5s ease" }}
+        />
+
+        {/* Navigation Buttons */}
+        <button
+          onClick={() => setIndex(1)}
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "10px",
+            transform: "translateY(-50%)",
+            background: "rgba(0,0,0,0.5)",
+            color: "white",
+            border: "none",
+            padding: "10px",
+            cursor: "pointer",
+          }}
+        >
+          &#8249; {/* Left arrow */}
+        </button>
+
+        <button
+          onClick={() => setIndex(0)}
+          style={{
+            position: "absolute",
+            top: "50%",
+            right: "10px",
+            transform: "translateY(-50%)",
+            background: "rgba(0,0,0,0.5)",
+            color: "white",
+            border: "none",
+            padding: "10px",
+            cursor: "pointer",
+          }}
+        >
+          &#8250; {/* Right arrow */}
+        </button>
+      </div>
+    </>
+  );
 }
