@@ -24,7 +24,6 @@ export default function Page() {
       ...prev,
       [name]: value,
     }));
-    console.log(user);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -37,12 +36,13 @@ export default function Page() {
       router.push("/login");
     } catch (error) {
       console.log(error);
-      
-      Swal.fire({
-        icon: "error",
-        title: "Registration Failed",
-        text: error.response.data.message
-      });
+     if (axios.isAxiosError(error) && error.response) {
+       Swal.fire({
+         icon: "error",
+         title: "Registration Failed",
+         text: error.response.data.message || "An error occurred.",
+       });
+     }
     }
   };
 
