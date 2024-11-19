@@ -1,8 +1,9 @@
-"use sever";
+"use client";
 
 import { product } from "@/type";
+import { WishList } from "./WishList";
 
-export async function FeaturedCard({ product }: { product: product }) {
+export async function ProductCard({ product }: { product: product }) {
   return (
     <div
       className="card bg-base-100 shadow-xl relative flex flex-col justify-between"
@@ -18,6 +19,8 @@ export async function FeaturedCard({ product }: { product: product }) {
           alt={product.name}
           className="object-cover w-full h-full"
         />
+        {/* Heart icon */}
+        <WishList />
       </figure>
       <div className="card-body flex flex-col">
         <h2 className="card-title truncate">{product.name}</h2>

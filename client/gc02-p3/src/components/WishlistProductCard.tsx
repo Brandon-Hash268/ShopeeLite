@@ -1,8 +1,8 @@
 "use client";
 
-import { WishList } from "./WishList";
+import { RemoveWishList } from "./RemoveWishList";
 
-export async function ProductCard() {
+export async function WishListProduct() {
   return (
     <div className="card bg-base-100 w-auto shadow-xl relative">
       <link
@@ -15,7 +15,7 @@ export async function ProductCard() {
           alt="Shoes"
         />
         {/* Heart icon */}
-        <WishList />
+        <RemoveWishList />
       </figure>
       <div className="card-body">
         <h2 className="card-title truncate">

@@ -4,8 +4,12 @@ import { Footer } from "@/components/Footer";
 import { FeaturedCard } from "@/components/FeaturedCard";
 import Link from "next/link";
 import { MainNavbar } from "@/components/mainNavbar";
+import { product } from "@/type";
 
 export default async function Home() {
+  const response = await fetch("http://localhost:3000/apis/products");
+  const products = await response.json()
+  
   return (
     <div>
       <MainNavbar />
@@ -34,22 +38,11 @@ export default async function Home() {
             whiteSpace: "nowrap",
           }}
         >
-          <div className="w-64 h-80">
-            <FeaturedCard />
-          </div>
-          <div className="w-64 h-80">
-            <FeaturedCard />
-          </div>
-          <div className="w-64 h-80">
-            <FeaturedCard />
-          </div>
-          <div className="w-64 h-80">
-            <FeaturedCard />
-          </div>
-          <div className="w-64 h-80">
-            <FeaturedCard />
-          </div>
-          
+          {products.slice(0, 5).map((product:product,i:number) => (
+            <div key={i}>
+              <FeaturedCard product={product}/>
+            </div>
+          ))}
         </div>
       </div>
 

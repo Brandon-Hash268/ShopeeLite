@@ -1,6 +1,6 @@
-'use client'
+"use client";
 import { MainNavbar } from "@/components/mainNavbar";
-import { ProductCard } from "@/components/ProductCars";
+import { WishListProduct } from "@/components/WishlistProductCard";
 
 export default function page() {
   return (
@@ -12,22 +12,22 @@ export default function page() {
 
       <div className="flex flex-wrap my-10 gap-4 gap-y-[48px] justify-center content-center">
         <div className="w-64 h-80">
-          <ProductCard />
+          <WishListProduct />
         </div>
         <div className="w-64 h-80">
-          <ProductCard />
+          <WishListProduct />
         </div>
         <div className="w-64 h-80">
-          <ProductCard />
+          <WishListProduct />
         </div>
         <div className="w-64 h-80">
-          <ProductCard />
+          <WishListProduct />
         </div>
         <div className="w-64 h-80">
-          <ProductCard />
+          <WishListProduct />
         </div>
         <div className="w-64 h-80">
-          <ProductCard />
+          <WishListProduct />
         </div>
       </div>
     </div>
