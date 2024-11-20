@@ -2,8 +2,9 @@
 
 import { product } from "@/type";
 import { RemoveWishList } from "./RemoveWishList";
+import Image from "next/image";
 
-export async function WishListProduct({ product }: { product: product }) {
+export function WishListProduct({ product,fetchData }: { product: product,fetchData:()=>void }) {
   console.log(product);
   
   return (
@@ -16,13 +17,15 @@ export async function WishListProduct({ product }: { product: product }) {
         rel="stylesheet"
       />
       <figure className="relative h-1/2">
-        <img
+        <Image
           src={product.thumbnail}
           alt={product.name}
           className="object-cover w-full h-full"
+          width={400}
+          height={400}
         />
         {/* Heart icon */}
-        <RemoveWishList  />
+        <RemoveWishList  productId={product._id} fetchData={fetchData} />
       </figure>
       <div className="card-body flex flex-col">
         <h2 className="card-title truncate">{product.name}</h2>

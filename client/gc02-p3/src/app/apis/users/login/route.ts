@@ -1,13 +1,16 @@
 import { User } from "@/db/models/user";
+import { cookies } from "next/headers";
 import { ZodError } from "zod";
 
 export async function POST(request:Request) {
    try {
      const body = await request.json();
 
-     await User.login(body);
-
-     return Response.json({ message: "Login succesnfully" });
+     const token = await User.login(body);
+    //  console.log(token,"token");
+     
+     cookies().set("Authorization",token)
+     return Response.json(token);
    } catch (error) {
      // console.log(error.issues[0].message);
      if (error instanceof ZodError) {

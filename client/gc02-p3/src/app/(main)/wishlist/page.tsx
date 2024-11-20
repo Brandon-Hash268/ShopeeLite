@@ -1,15 +1,24 @@
 "use client";
 import { WishListProduct } from "@/components/WishlistProductCard";
 import { product, wishCard } from "@/type";
+import { useEffect, useState } from "react";
 
-export default async function page() {
-  const response = await fetch("http://localhost:3000/apis/wishlists",{method:"GET"});
-  const wish = await response.json();
+export default function Page() {
+  const [data, setData] = useState<wishCard[]>([]);
+  async function fetchData() {
+    const response = await fetch("http://localhost:3000/apis/wishlists", {
+      next: { tags: ["wishlist"] },
+    });
+    const wish = await response.json();
+    setData(wish);
+  }
 
-  console.log(wish);
-  
-  
-  
+  useEffect(() => {
+    console.log("testtttttttttt");
+    
+    fetchData();
+  }, []);
+
   return (
     <div>
       <div className="flex justify-center content-center mt-4">
@@ -17,11 +26,11 @@ export default async function page() {
       </div>
 
       <div className="flex flex-wrap my-10 gap-4 gap-y-[48px] justify-center content-center">
-        {wish.map((wishItem:wishCard[]) =>
+        {data.map((wishItem:wishCard) =>
           // Here we map over the products array inside each wish card
-          wishItem.products.map((product:product, i:number) => (
+          wishItem.products.map((product: product, i: number) => (
             <div key={i}>
-              <WishListProduct product={product} />
+              <WishListProduct product={product} fetchData={fetchData}/>
             </div>
           ))
         )}

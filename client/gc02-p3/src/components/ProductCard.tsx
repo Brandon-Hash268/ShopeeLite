@@ -2,8 +2,25 @@
 
 import { product } from "@/type";
 import { WishList } from "./WishList";
+import Image from "next/image";
+import axios from "axios";
+import Swal from "sweetalert2";
 
-export async function ProductCard({ product }: { product: product }) {
+export function ProductCard({ product }: { product: product }) {
+  const handleDetail =async()=>{
+    try {
+      await axios.get("http://localhost:3000/apis/products/"+product.slug);
+      
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        Swal.fire({
+          icon: "error",
+          title: "Registration Failed",
+          text: error.response.data.message || "An error occurred.",
+        });
+      }
+    }
+  }
   return (
     <div
       className="card bg-base-100 shadow-xl relative flex flex-col justify-between"
@@ -14,10 +31,13 @@ export async function ProductCard({ product }: { product: product }) {
         rel="stylesheet"
       />
       <figure className="relative h-1/2">
-        <img
+        <Image
           src={product.thumbnail}
           alt={product.name}
           className="object-cover w-full h-full"
+          width={400}
+          height={400}
+          onClick={handleDetail}
         />
         {/* Heart icon */}
         <WishList productId={product._id} />

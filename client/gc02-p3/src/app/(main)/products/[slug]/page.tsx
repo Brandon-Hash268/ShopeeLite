@@ -1,13 +1,15 @@
-"use client";
+"use server";
 
-import { MainNavbar } from "@/components/mainNavbar";
-import { useState } from "react";
+type props = {
+  params: {
+    slug: string;
+  };
+};
 
-export default function page() {
-  const [like, setLike] = useState(false);
+export default async function Page({params}: props) {
+  //   const [like, setLike] = useState(false);
   return (
     <>
-      <MainNavbar />
       <div className="justify-center content-center flex mt-40">
         <link
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -26,21 +28,8 @@ export default function page() {
 
             <div className="card-actions justify-end">
               <div>
-                <button
-                  className="btn btn-primary"
-                  onClick={() => {
-                    if (like) {
-                      setLike(false);
-                    } else {
-                      setLike(true);
-                    }
-                  }}
-                >
-                  <i
-                    className={
-                      like ? "fa-solid fa-heart" : "fa-regular fa-heart"
-                    }
-                  ></i>
+                <button className="btn btn-primary">
+                  <i className={"fa-regular fa-heart"}></i>
                 </button>
               </div>
             </div>

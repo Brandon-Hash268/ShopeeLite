@@ -7,4 +7,11 @@ export class Product{
         const products = await this.db.find().sort("createdAt",-1).toArray()
         return products
     }
+
+    static async findDetail({slug}:{slug:string}){
+        const products = await this.db.findOne({slug})
+        console.log(products);
+        
+        return products
+    }
 }
