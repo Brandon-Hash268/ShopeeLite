@@ -4,8 +4,15 @@ import { SearchBar } from "@/components/SearchBar";
 import { product } from "@/type";
 import { useEffect, useState } from "react";
 
+type paramsProp ={
+  params:{
+    slug:string
+  }
+}
+
 export default function Page() {
   const [products, setProducts] = useState([]);
+  
 
   const fetchData = async () => {
     const response = await fetch("http://localhost:3000/apis/products");

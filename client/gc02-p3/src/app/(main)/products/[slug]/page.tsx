@@ -1,30 +1,59 @@
 "use server";
 
+import { Rp } from "@/helpers/currency";
+import axios from "axios";
+import Image from "next/image";
+
 type props = {
   params: {
     slug: string;
   };
 };
 
-export default async function Page({params}: props) {
+export default async function Page({ params }: props) {
+  let product;
+  try {
+    const { data } = await axios.get(
+      "http://localhost:3000/apis/products/detail",
+      { params: { slug: params.slug } }
+    );
+    product = data;
+  } catch (error) {
+    console.log("🚀 ~ Page ~ error:", error);
+  }
+
   //   const [like, setLike] = useState(false);
   return (
     <>
-      <div className="justify-center content-center flex mt-40">
-        <link
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-          rel="stylesheet"
-        />
-        <div className="card lg:card-side bg-base-100 shadow-xl w-[900px] h-72">
+      <div className="justify-center content-center flex my-5">
+        <div className="card lg:card-side bg-base-100 shadow-xl max-w-[900px]">
           <figure>
             <img
-              src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.webp"
+              src={product.thumbnail}
               alt="Album"
+              className="min-w-[300px]"
             />
           </figure>
           <div className="card-body">
-            <h2 className="card-title">New album is released!</h2>
-            <p>Click the button to listen on Spotiwhy app.</p>
+            <h2 className="card-title">{product.name}</h2>
+            <div>
+              <p className="text-sm">{Rp(product.price)}</p>
+            </div>
+            <div className="card-actions flex-wrap justify-start mt-2">
+              {product.tags.map((tag: string, i: number) => (
+                <div key={i} className="badge badge-outline">
+                  {tag}
+                </div>
+              ))}
+            </div>
+            <div className="card-actions flex-wrap justify-start mt-2">
+              {product.images.map((image: string, i: number) => (
+                <img src={image} alt="images" className="h-[100px]" />
+              ))}
+            </div>
+            <div className="max-w-[500px]">
+              <p className="text-sm">{product.description.slice(0, 200)}</p>
+            </div>
 
             <div className="card-actions justify-end">
               <div>

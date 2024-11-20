@@ -1,14 +1,12 @@
 import { Product } from "@/db/models/products";
 
-type paramsType = {
-  params: {
-    slug: string;
-  };
-};
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const slug = searchParams.get("slug");
+  // console.log(slug,"sluggggggg");
 
-export async function GET({ params }: paramsType) {
-  const { slug } = params;
-  const products = await Product.findDetail({slug});
-
-  return Response.json(products);
+  if (slug) {
+    const products = await Product.findDetail({ slug });
+    return Response.json(products);
+  }
 }

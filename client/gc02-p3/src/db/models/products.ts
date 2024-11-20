@@ -10,7 +10,7 @@ export class Product{
 
     static async findDetail({slug}:{slug:string}){
         const products = await this.db.findOne({slug})
-        console.log(products);
+        // console.log(products);
         
         return products
     }
