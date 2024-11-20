@@ -2,6 +2,8 @@ import { database } from "../config";
 import { compareSync, hashSync } from "bcryptjs";
 import { z } from "zod";
 import {sign} from "jsonwebtoken"
+import { HttpError } from "@/lib/error";
+import { error } from "console";
 
 type RegisterType = {
   name: string;
@@ -41,10 +43,10 @@ export class User {
       body.email
     );
     if (byEmail) {
-      throw new Error("User with that Email already exist");
+      throw new HttpError("User with that Email already exist",400);
     }
     if (byUsername) {
-      throw new Error("User with that Username already exist");
+      throw new HttpError("User with that Username already exist",400);
     }
     body.password = await hashSync(body.password, 10);
 
@@ -54,12 +56,12 @@ export class User {
   static async login(body:LoginType){
     const { byUsername:user } = await this.validateUniqe(body.username,"a");
     if (!user) {
-      throw new Error("Invalid Username/Password");
+      throw new HttpError("Invalid Username/Password",400);
     }
 
     const isValid = compareSync(body.password,user.password)
     if (!isValid) {
-      throw new Error("Invalid Username/Password");
+      throw new HttpError("Invalid Username/Password",400);
     }
 
     const token = sign({id:user._id},this.JWT_SECRET)
