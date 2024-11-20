@@ -31,7 +31,7 @@ export default function Page() {
     try {
       await axios.post("http://localhost:3000/apis/users/register",user);
 
-      console.log("Registration successful!");
+      // console.log("Registration successful!");
       router.push("/login");
     } catch (error) {
      if (axios.isAxiosError(error) && error.response) {

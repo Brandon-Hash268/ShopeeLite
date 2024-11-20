@@ -3,7 +3,6 @@ import { compareSync, hashSync } from "bcryptjs";
 import { z } from "zod";
 import {sign} from "jsonwebtoken"
 import { HttpError } from "@/lib/error";
-import { error } from "console";
 
 type RegisterType = {
   name: string;
@@ -25,7 +24,6 @@ const RegisterSchema = z.object({
   password: z.string().min(5, { message: "Password minimun length is 5" }),
 });
 export class User {
-  static JWT_SECRET = "qwerty"
   static db = database.collection<RegisterType>("Users");
 
   static async validateUniqe(username: string, email: string) {
@@ -36,7 +34,7 @@ export class User {
   }
 
   static async register(body: RegisterType) {
-    console.log(body,"aaaa")
+    // console.log(body,"aaaa")
     RegisterSchema.parse(body);
     const { byEmail, byUsername } = await this.validateUniqe(
       body.username,
@@ -64,7 +62,7 @@ export class User {
       throw new HttpError("Invalid Username/Password",400);
     }
 
-    const token = sign({id:user._id},this.JWT_SECRET)
+    const token = sign({id:user._id},process.env.JWT_SECRET as string)
     
     return token
   }

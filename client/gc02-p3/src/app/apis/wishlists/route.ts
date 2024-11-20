@@ -1,12 +1,14 @@
 import { Wish } from "@/db/models/wish";
+import { NextRequest } from "next/server";
 import { ZodError } from "zod";
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    //   console.log("aaaaaaaaaa");
+    const { productId } = await request.json();
+    const userId = request.headers.get("x-user-id");
+      // console.log(productId);
 
-    await Wish.create(body);
+    await Wish.create(productId, userId as string);
 
     return Response.json({ message: "Added to wish list successfully" });
   } catch (error) {
@@ -17,20 +19,21 @@ export async function POST(request: Request) {
         { status: 400 } // Bad Request
       );
     } else if (error instanceof Error) {
-      return new Response(
-        JSON.stringify({ message: error.message }),
-        { status: 400 }
-      );
+      return new Response(JSON.stringify({ message: error.message }), {
+        status: 400,
+      });
     }
   }
 }
 
-export async function DELETE(request: Request) {
+export async function DELETE(request: NextRequest) {
   try {
-    const body = await request.json();
+    const {productId} = await request.json();
+    const userId = request.headers.get("x-user-id");
+
     //   console.log("aaaaaaaaaa");
 
-    await Wish.destroy(body);
+    await Wish.destroy(productId,userId as string);
 
     return Response.json({ message: "Deleted from wish list successfully" });
   } catch (error) {
@@ -53,11 +56,10 @@ export async function GET() {
   try {
     const wish = await Wish.findAll();
     // console.log(wish[0].products,"productssssssssssss");
-    
 
     return Response.json(wish);
   } catch (error) {
-    console.log("🚀 ~ GET ~ error:", error)
+    // console.log("🚀 ~ GET ~ error:", error);
     if (error instanceof ZodError) {
       return new Response(
         JSON.stringify({ message: error.issues[0].message }),

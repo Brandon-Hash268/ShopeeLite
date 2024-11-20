@@ -20,19 +20,19 @@ export default function Page() {
       ...prev,
       [name]: value,
     }));
-    console.log(user);
+    // console.log(user);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(user);
+    // console.log(user);
 
     try {
       await axios.post("http://localhost:3000/apis/users/login", user);
 
       router.push("/");
     } catch (error) {
-      console.log("🚀 ~ handleSubmit ~ error:", error)
+      // console.log("🚀 ~ handleSubmit ~ error:", error)
       if (axios.isAxiosError(error) && error.response) {
         Swal.fire({
           icon: "error",

@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 export function WishList({ productId }: { productId: string }) {
   const handleWish = async()=>{
     try {
-      console.log(productId);
+      // console.log(productId);
       await axios.post("http://localhost:3000/apis/wishlists",{productId});
       Swal.fire({
         icon:"success",

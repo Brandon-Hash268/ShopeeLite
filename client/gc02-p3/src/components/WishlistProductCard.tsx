@@ -5,7 +5,7 @@ import { RemoveWishList } from "./RemoveWishList";
 import Image from "next/image";
 
 export function WishListProduct({ product,fetchData }: { product: product,fetchData:()=>void }) {
-  console.log(product);
+  // console.log(product);
   
   return (
     <div

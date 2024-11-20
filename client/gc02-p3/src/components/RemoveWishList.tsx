@@ -14,7 +14,7 @@ export function RemoveWishList({
   // const router = useRouter();
   const handleDelete = async () => {
     try {
-      console.log(productId);
+      // console.log(productId);
       await axios.delete("http://localhost:3000/apis/wishlists", {
         data: { productId },
       });
@@ -27,7 +27,7 @@ export function RemoveWishList({
       // router.push("/wishlist");
       fetchData()
     } catch (error) {
-      console.log(error);
+      // console.log(error);
 
       if (axios.isAxiosError(error) && error.response) {
         Swal.fire({

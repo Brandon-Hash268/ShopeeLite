@@ -13,7 +13,7 @@ export default function Page() {
   
   const handleSearch = (term:string)=>{
     setSearch(term)
-    console.log(search);
+    // console.log(search);
     
   }
   

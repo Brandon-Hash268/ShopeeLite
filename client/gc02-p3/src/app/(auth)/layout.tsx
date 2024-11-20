@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import logo from "@/images/image.png";
+import { Protected } from "@/components/protected";
 
 export default function RootLayout({
   children,
@@ -8,7 +9,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
+    <Protected>
       <div className="navbar bg-base-100 ">
         <div className="flex-1">
           <Link href="/" className="btn btn-ghost text-xl">
@@ -40,6 +41,6 @@ export default function RootLayout({
       </div>
 
       {children}
-    </>
+    </Protected>
   );
 }
