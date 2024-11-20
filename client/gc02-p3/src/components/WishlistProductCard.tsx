@@ -1,32 +1,40 @@
 "use client";
 
+import { product } from "@/type";
 import { RemoveWishList } from "./RemoveWishList";
 
-export async function WishListProduct() {
+export async function WishListProduct({ product }: { product: product }) {
+  console.log(product);
+  
   return (
-    <div className="card bg-base-100 w-auto shadow-xl relative">
+    <div
+      className="card bg-base-100 shadow-xl relative flex flex-col justify-between"
+      style={{ width: "280px", height: "380px" }}
+    >
       <link
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         rel="stylesheet"
       />
-      <figure className="relative">
+      <figure className="relative h-1/2">
         <img
-          src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-          alt="Shoes"
+          src={product.thumbnail}
+          alt={product.name}
+          className="object-cover w-full h-full"
         />
         {/* Heart icon */}
-        <RemoveWishList />
+        <RemoveWishList  />
       </figure>
-      <div className="card-body">
-        <h2 className="card-title truncate">
-          Shoes! <div className="badge badge-secondary">NEW</div>
-        </h2>
-        <p className="text-sm text-gray-500 overflow-hidden text-ellipsis">
-          If a dog chews shoes whose shoes does he choose?
+      <div className="card-body flex flex-col">
+        <h2 className="card-title truncate">{product.name}</h2>
+        <p className="text-sm text-gray-500 overflow-hidden text-ellipsis mb-auto">
+          {product.excerpt}
         </p>
-        <div className="card-actions justify-end">
-          <div className="badge badge-outline">Fashion</div>
-          <div className="badge badge-outline">Products</div>
+        <div className="card-actions flex-wrap justify-end mt-2">
+          {product.tags.map((tag: string, i: number) => (
+            <div key={i} className="badge badge-outline">
+              {tag}
+            </div>
+          ))}
         </div>
       </div>
     </div>

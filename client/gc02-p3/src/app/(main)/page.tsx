@@ -3,7 +3,6 @@ import { Banner } from "@/components/banner";
 import { Footer } from "@/components/Footer";
 import { FeaturedCard } from "@/components/FeaturedCard";
 import Link from "next/link";
-import { MainNavbar } from "@/components/mainNavbar";
 import { product } from "@/type";
 
 export default async function Home() {
@@ -12,7 +11,6 @@ export default async function Home() {
   
   return (
     <div>
-      <MainNavbar />
 
       <div className="flex mt-4 justify-center content-center">
         <Banner />

@@ -5,7 +5,6 @@ export class Product{
 
     static async findAll(){
         const products = await this.db.find().sort("createdAt",-1).toArray()
-
         return products
     }
 }

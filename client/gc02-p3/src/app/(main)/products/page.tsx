@@ -1,5 +1,4 @@
 "use client";
-import { MainNavbar } from "@/components/mainNavbar";
 import { ProductCard } from "@/components/ProductCard";
 import { SearchBar } from "@/components/SearchBar";
 import { product } from "@/type";
@@ -9,7 +8,6 @@ export default async function page() {
     const products = await response.json();
   return (
     <div>
-      <MainNavbar />
       <div className="mt-6 mx-auto container">
         <SearchBar />
 

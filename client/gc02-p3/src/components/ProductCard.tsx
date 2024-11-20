@@ -7,7 +7,7 @@ export async function ProductCard({ product }: { product: product }) {
   return (
     <div
       className="card bg-base-100 shadow-xl relative flex flex-col justify-between"
-      style={{ width: "280px", height: "380px" }} 
+      style={{ width: "280px", height: "430px" }}
     >
       <link
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -26,6 +26,11 @@ export async function ProductCard({ product }: { product: product }) {
         <h2 className="card-title truncate">{product.name}</h2>
         <p className="text-sm text-gray-500 overflow-hidden text-ellipsis mb-auto">
           {product.excerpt}
+        </p>
+        <p className="text-sm text-gray-500 overflow-hidden text-ellipsis mb-auto">
+          <p className="text-sm text-gray-500 overflow-hidden text-ellipsis mb-auto">
+            Rp {new Intl.NumberFormat("id-ID").format(product.price)}
+          </p>
         </p>
         <div className="card-actions flex-wrap justify-end mt-2">
           {product.tags.map((tag: string, i: number) => (

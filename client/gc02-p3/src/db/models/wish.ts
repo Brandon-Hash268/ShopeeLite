@@ -18,7 +18,7 @@ export class Wish {
   }
 
   static async findAll() {
-    const userId = "673c6b379e7622f483208217"; // Example userId to filter by
+    const userId = new ObjectId("673c6b379e7622f483208217"); // Example userId to filter by
 
     const results = await this.db.aggregate([
       // Match stage to filter by userId
@@ -27,20 +27,19 @@ export class Wish {
           userId: userId,
         },
       },
-
       {
         $lookup: {
-          from: "products",
+          from: "Products",
           localField: "productId",
           foreignField: "_id",
           as: "products",
         },
       },
-      {
-        $unwind: "$products",
-      },
-    ]);
-    console.log(result)
+      // {
+      //   $unwind:"$products"
+      // }
+    ]).toArray();
+    // console.log(results[0],"aaaaaaaaaa")
     return results; // Return the aggregation results
   }
 }

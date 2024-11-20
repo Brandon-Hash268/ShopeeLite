@@ -1,5 +1,5 @@
 import Image from "next/image";
-import banner from "../app/images/shopeeBanner.jpg";
+import banner from "@/images/shopeeBanner.jpg";
 
 
 export function Banner() {
