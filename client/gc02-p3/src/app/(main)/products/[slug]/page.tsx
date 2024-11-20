@@ -1,5 +1,6 @@
 "use server";
 
+import { WishList } from "@/components/WishList";
 import { Rp } from "@/helpers/currency";
 import axios from "axios";
 import Image from "next/image";
@@ -31,7 +32,7 @@ export default async function Page({ params }: props) {
             <img
               src={product.thumbnail}
               alt="Album"
-              className="min-w-[300px]"
+              className="w-[400px]"
             />
           </figure>
           <div className="card-body">
@@ -58,7 +59,7 @@ export default async function Page({ params }: props) {
             <div className="card-actions justify-end">
               <div>
                 <button className="btn btn-primary">
-                  <i className={"fa-regular fa-heart"}></i>
+                  <WishList productId={product._id}/>
                 </button>
               </div>
             </div>

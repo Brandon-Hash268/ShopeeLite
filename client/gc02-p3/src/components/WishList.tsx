@@ -25,7 +25,7 @@ export function WishList({ productId }: { productId: string }) {
     }
   }
   return (
-    <div className="absolute top-2 right-3" onClick={handleWish}>
+    <div onClick={handleWish}>
       <link
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         rel="stylesheet"

@@ -26,15 +26,17 @@ export function ProductCard({ product }: { product: product }) {
           onClick={handleDetail}
         />
         {/* Heart icon */}
-        <WishList productId={product._id} />
+        <div className="absolute top-2 right-3">
+          <WishList productId={product._id} />
+        </div>
       </figure>
       <div className="card-body flex flex-col">
         <h2 className="card-title truncate">{product.name}</h2>
         <p className="text-sm text-gray-500 overflow-hidden text-ellipsis mb-auto">
           {product.excerpt}
         </p>
-          <p className="text-sm text-gray-500 overflow-hidden text-ellipsis mb-auto">
-           {Rp(product.price)}
+        <p className="text-sm text-gray-500 overflow-hidden text-ellipsis mb-auto">
+          {Rp(product.price)}
         </p>
         <div className="card-actions flex-wrap justify-end mt-2">
           {product.tags.map((tag: string, i: number) => (
