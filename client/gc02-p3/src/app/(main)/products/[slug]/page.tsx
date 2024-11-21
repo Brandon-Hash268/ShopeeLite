@@ -12,29 +12,30 @@ export type Params = {
   };
 };
 
-export async function generateMetadata(
-  { params }: Params,
-): Promise<Metadata> {
-  const product = await getDetailProduct(params.slug);
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  let product;
+  try {
+    product = await getDetailProduct(params.slug);
+  } catch (error) {
+    redirect("/products");
+  }
   return {
     title: product.name,
     description: product.excerpt,
-    openGraph:{
-      images:[product.thumbnail]
-    }
+    openGraph: {
+      images: [product.thumbnail],
+    },
   };
 }
 
-
 export default async function Page({ params }: Params) {
-  const product = await getDetailProduct(params.slug)
-
-
-  if (!product) {
+  let product;
+  try {
+    product = await getDetailProduct(params.slug);
+  } catch (error) {
     redirect("/products");
   }
 
-  //   const [like, setLike] = useState(false);
   return (
     <>
       <div className="justify-center content-center flex my-5">

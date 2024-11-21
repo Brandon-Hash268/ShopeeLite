@@ -36,7 +36,7 @@ export default function Page() {
       router.push("/");
       window.location.reload();
     } catch (error) {
-      console.log("🚀 ~ handleSubmit ~ error:", error)
+      // console.log("🚀 ~ handleSubmit ~ error:", error)
       if (axios.isAxiosError(error) && error.response) {
         Swal.fire({
           icon: "error",
