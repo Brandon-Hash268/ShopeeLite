@@ -1,3 +1,4 @@
+'use client'
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ProductCard } from "./ProductCard";
 import { product } from "@/type";

@@ -31,6 +31,7 @@ export default function Page() {
       await axios.post("http://localhost:3000/apis/users/login", user);
 
       router.push("/");
+      window.location.reload();
     } catch (error) {
       // console.log("🚀 ~ handleSubmit ~ error:", error)
       if (axios.isAxiosError(error) && error.response) {

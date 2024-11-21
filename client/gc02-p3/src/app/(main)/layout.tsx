@@ -9,7 +9,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const token = cookies().has("Authorization");
+  const token = cookies().get("Authorization");
+  console.log(token);
+
   return (
     <>
       <div className="navbar bg-shopee">
@@ -17,48 +19,51 @@ export default function RootLayout({
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
           rel="stylesheet"
         />
-        <div className="flex-1">
-          <Link href="/" className="btn btn-ghost text-xl">
-            <Image src={logo} alt="logo" width={130} />
-          </Link>
-          <Link href="/products" className="text-white pt-3 font-medium">
-            Products
-          </Link>
-        </div>
-        <div className="flex-none gap-2">
-          <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
-              <div className="w-10 rounded-full justify-center content-center">
-                <i className="fa-solid fa-ellipsis-vertical text-white"></i>
-              </div>
-            </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-            >
-              <li>
-                <Link href="/wishlist">Whish list</Link>
-              </li>
-              <li>
-                {token ? (
-                  <form action={async()=>{
-                    'use server'
-
-                    cookies().delete("Authorization")
-                    redirect("/")
-                  }}>
-                    <a>Logout</a>
-                  </form>
-                ) : (
-                  <Link href="/login">Login</Link>
-                )}
-              </li>
-            </ul>
+        <div className="flex-1 justify-between content-center">
+          <div>
+            <Link href="/" className="btn btn-ghost text-xl">
+              <Image src={logo} alt="logo" width={130} />
+            </Link>
           </div>
+          <div className="gap-3 flex pr-[90px]">
+            <div>
+              <Link href="/products" className="text-white pt-3 font-medium">
+                Products
+              </Link>
+            </div>
+            <div>
+              <Link href="/wishlist" className="text-white pt-3 font-medium">
+                Wishlist
+              </Link>
+            </div>
+          </div>
+          {token ? (
+            <div className="flex justify-center content-center gap-1">
+              <form
+                action={async () => {
+                  "use server";
+                  console.log("aaaa");
+
+                  cookies().delete("Authorization");
+                  redirect("/login");
+                }}
+              >
+                <button type="submit" className="text-white font-medium">
+                  Logout
+                </button>
+              </form>
+              <i className="fa-solid fa-right-from-bracket pt-[5px] text-white"></i>
+            </div>
+          ) : (
+            <div className="flex justify-center content-center gap-1">
+              <div>
+                <Link className="text-white  font-medium " href="/login">
+                  Login
+                </Link>
+              </div>
+              <i className="fa-solid fa-right-from-bracket pt-[5px] text-white"></i>
+            </div>
+          )}
         </div>
       </div>
       {children}

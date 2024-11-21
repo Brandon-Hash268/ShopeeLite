@@ -1,37 +1,37 @@
 "use server";
 
+import { getDetailProduct } from "@/action";
 import { WishList } from "@/components/WishList";
 import { Rp } from "@/helpers/currency";
-import axios from "axios";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
-import Swal from "sweetalert2";
 
-type props = {
+export type Params = {
   params: {
     slug: string;
   };
 };
 
-export default async function Page({ params }: props) {
-  let product;
-  try {
-    const { data } = await axios.get(
-      "http://localhost:3000/apis/products/detail",
-      { params: { slug: params.slug } }
-    );
-    product = data;
-  } catch (error) {
-    if (axios.isAxiosError(error) && error.response) {
-      Swal.fire({
-        icon: "error",
-        title: "Registration Failed",
-        text: error.response.data.message || "An error occurred.",
-      });
+export async function generateMetadata(
+  { params }: Params,
+): Promise<Metadata> {
+  const product = await getDetailProduct(params.slug);
+  return {
+    title: product.name,
+    description: product.excerpt,
+    openGraph:{
+      images:[product.thumbnail]
     }
-  }
+  };
+}
+
+
+export default async function Page({ params }: Params) {
+  const product = await getDetailProduct(params.slug)
+
 
   if (!product) {
-    redirect("/products")
+    redirect("/products");
   }
 
   //   const [like, setLike] = useState(false);
@@ -40,11 +40,7 @@ export default async function Page({ params }: props) {
       <div className="justify-center content-center flex my-5">
         <div className="card lg:card-side bg-base-100 shadow-xl max-w-[900px]">
           <figure>
-            <img
-              src={product.thumbnail}
-              alt="Album"
-              className="w-[400px]"
-            />
+            <img src={product.thumbnail} alt="Album" className="w-[400px]" />
           </figure>
           <div className="card-body">
             <h2 className="card-title">{product.name}</h2>
@@ -70,7 +66,7 @@ export default async function Page({ params }: props) {
             <div className="card-actions justify-end">
               <div>
                 <button className="btn btn-primary">
-                  <WishList productId={product._id}/>
+                  <WishList productId={product._id} />
                 </button>
               </div>
             </div>
