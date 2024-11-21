@@ -3,7 +3,8 @@
 import { WishList } from "@/components/WishList";
 import { Rp } from "@/helpers/currency";
 import axios from "axios";
-import Image from "next/image";
+import { redirect } from "next/navigation";
+import Swal from "sweetalert2";
 
 type props = {
   params: {
@@ -20,7 +21,17 @@ export default async function Page({ params }: props) {
     );
     product = data;
   } catch (error) {
-    console.log("🚀 ~ Page ~ error:", error);
+    if (axios.isAxiosError(error) && error.response) {
+      Swal.fire({
+        icon: "error",
+        title: "Registration Failed",
+        text: error.response.data.message || "An error occurred.",
+      });
+    }
+  }
+
+  if (!product) {
+    redirect("/products")
   }
 
   //   const [like, setLike] = useState(false);
@@ -49,7 +60,7 @@ export default async function Page({ params }: props) {
             </div>
             <div className="card-actions flex-wrap justify-start mt-2">
               {product.images.map((image: string, i: number) => (
-                <img src={image} alt="images" className="h-[100px]" />
+                <img key={i} src={image} alt="images" className="h-[100px]" />
               ))}
             </div>
             <div className="max-w-[500px]">

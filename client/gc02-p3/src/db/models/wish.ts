@@ -1,15 +1,22 @@
 import { ObjectId } from "mongodb";
 import { database } from "../config";
+import { HttpError } from "@/lib/error";
 
 export class Wish {
   static db = database.collection("Wishes");
 
   static async create(productId:string,userId:string) {
-      // console.log(productId);
+      const idUser = new ObjectId(userId)
+      const idProduct = new ObjectId(productId)
+
+      const Exist = await this.db.findOne({userId:idUser,productId:idProduct})
+      if (Exist) {
+        throw new HttpError("You've Wishlisted this product",400)
+      }
 
     const wish = {
-      userId: new ObjectId(userId),
-      productId: new ObjectId(productId),
+      userId: new ObjectId(idUser),
+      productId: new ObjectId(idProduct),
       createdAt: new Date(),
       updatedAt: new Date(),
     };

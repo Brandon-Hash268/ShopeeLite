@@ -1,12 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import logo from "@/images/1656181621shopee-logo-white.png";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const token = cookies().has("Authorization");
   return (
     <>
       <div className="navbar bg-shopee">
@@ -41,7 +44,18 @@ export default function RootLayout({
                 <Link href="/wishlist">Whish list</Link>
               </li>
               <li>
-                <a>Logout</a>
+                {token ? (
+                  <form action={async()=>{
+                    'use server'
+
+                    cookies().delete("Authorization")
+                    redirect("/")
+                  }}>
+                    <a>Logout</a>
+                  </form>
+                ) : (
+                  <Link href="/login">Login</Link>
+                )}
               </li>
             </ul>
           </div>

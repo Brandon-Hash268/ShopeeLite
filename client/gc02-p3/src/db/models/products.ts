@@ -1,3 +1,4 @@
+import { HttpError } from "@/lib/error";
 import { database } from "../config";
 
 export class Product {
@@ -25,6 +26,9 @@ export class Product {
 
   static async findDetail({ slug }: { slug: string }) {
     const products = await this.db.findOne({ slug });
+    if (!products) {
+      throw new HttpError("Product not Found",404)
+    }
     // console.log(products);
 
     return products;
