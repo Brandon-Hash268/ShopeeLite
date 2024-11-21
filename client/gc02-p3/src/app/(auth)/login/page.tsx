@@ -20,7 +20,7 @@ export default function Page() {
       ...prev,
       [name]: value,
     }));
-    console.log(user);
+    // console.log(user);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
