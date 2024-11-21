@@ -10,7 +10,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const token = cookies().get("Authorization");
-  console.log(token);
+  // console.log(token);
 
   return (
     <>
@@ -42,7 +42,7 @@ export default function RootLayout({
               <form
                 action={async () => {
                   "use server";
-                  console.log("aaaa");
+                  // console.log("aaaa");
 
                   cookies().delete("Authorization");
                   redirect("/login");

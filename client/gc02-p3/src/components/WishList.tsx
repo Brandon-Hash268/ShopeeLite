@@ -6,7 +6,9 @@ export function WishList({ productId }: { productId: string }) {
   const handleWish = async()=>{
     try {
       // console.log(productId);
-      await axios.post("http://localhost:3000/apis/wishlists",{productId});
+      await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/apis/wishlists`, {
+        productId,
+      });
       Swal.fire({
         icon:"success",
         title:"Successfull",

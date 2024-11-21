@@ -12,7 +12,9 @@ export default function Page() {
 
   const fetchData = async () => {
     try {
-      const { data } = await axios.get("http://localhost:3000/apis/wishlists");
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/apis/wishlists`
+      );
       // console.log(data, "dataaaaaaaa");
 
       setData(data);

@@ -15,7 +15,7 @@ export function RemoveWishList({
   const handleDelete = async () => {
     try {
       // console.log(productId);
-      await axios.delete("http://localhost:3000/apis/wishlists", {
+      await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/apis/wishlists`, {
         data: { productId },
       });
       Swal.fire({

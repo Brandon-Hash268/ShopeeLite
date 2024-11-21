@@ -11,10 +11,10 @@ import axios from "axios"
 export default function Page() {
   const router = useRouter()
   const [user, setUser] = useState({
-    name: "orang",
-    username: "orang",
-    email: "orang@email.com",
-    password: "orang",
+    name: "",
+    username: "",
+    email: "",
+    password: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +29,10 @@ export default function Page() {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:3000/apis/users/register",user);
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/apis/users/register`,
+        user
+      );
 
       // console.log("Registration successful!");
       router.push("/login");

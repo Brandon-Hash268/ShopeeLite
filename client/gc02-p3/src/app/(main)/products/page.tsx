@@ -18,9 +18,12 @@ export default function Page() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await axios.get("http://localhost:3000/apis/products", {
-        params: { search: search, page: page },
-      });
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/apis/products`,
+        {
+          params: { search: search, page: page },
+        }
+      );
       setProducts(page === 1 ? data : [...products, ...data]);
       setHasMore(data.length > 0)
     };

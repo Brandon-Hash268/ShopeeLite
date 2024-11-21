@@ -1,7 +1,6 @@
 "use server";
 import axios from "axios";
 import { revalidateTag } from "next/cache";
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Swal from "sweetalert2";
 
@@ -12,7 +11,7 @@ export async function revalidateByTag(tag: string) {
 export async function getDetailProduct(slug: string) {
   try {
     const { data } = await axios.get(
-      "http://localhost:3000/apis/products/detail",
+      `${process.env.NEXT_PUBLIC_BASE_URL}/apis/products/detail`,
       { params: { slug: slug } }
     );
     return data;
@@ -25,9 +24,4 @@ export async function getDetailProduct(slug: string) {
       });
     }
   }
-}
-
-export async function logoutAction() {
-    // cookies().delete("Authorization");
-    redirect("/");
 }

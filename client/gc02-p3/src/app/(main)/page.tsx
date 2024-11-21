@@ -6,7 +6,9 @@ import Link from "next/link";
 import { product } from "@/type";
 
 export default async function Home() {
-  const response = await fetch("http://localhost:3000/apis/products");
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/apis/products`
+  );
   const products = await response.json()
   
   return (

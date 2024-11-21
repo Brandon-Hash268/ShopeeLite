@@ -10,8 +10,8 @@ import Swal from "sweetalert2";
 export default function Page() {
   const router = useRouter();
   const [user, setUser] = useState({
-    username: "orang",
-    password: "orang",
+    username: "",
+    password: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +28,10 @@ export default function Page() {
     // console.log(user);
 
     try {
-      await axios.post("http://localhost:3000/apis/users/login", user);
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/apis/users/login`,
+        user
+      );
 
       router.push("/");
       window.location.reload();
