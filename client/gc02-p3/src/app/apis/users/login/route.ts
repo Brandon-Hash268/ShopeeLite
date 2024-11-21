@@ -1,9 +1,9 @@
 import { User } from "@/db/models/user";
 import { handlError } from "@/lib/error";
 import { cookies } from "next/headers";
-import { NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
-export async function POST(request:NextResponse) {
+export async function POST(request:NextRequest) {
    try {
      const body = await request.json();
 

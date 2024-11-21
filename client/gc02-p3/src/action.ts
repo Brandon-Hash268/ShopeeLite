@@ -1,7 +1,6 @@
 "use server";
 import axios from "axios";
 import { revalidateTag } from "next/cache";
-import { redirect } from "next/navigation";
 import Swal from "sweetalert2";
 
 export async function revalidateByTag(tag: string) {
