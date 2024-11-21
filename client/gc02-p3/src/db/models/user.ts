@@ -12,7 +12,7 @@ type RegisterType = {
 };
 
 type LoginType = {
-  username: string;
+  email: string;
   password: string;
 };
 
@@ -20,8 +20,16 @@ type LoginType = {
 const RegisterSchema = z.object({
   name: z.string(),
   username: z.string().min(1, { message: "Username is required" }),
-  email: z.string().email({ message: "Invalid Email format" }),
+  email: z
+    .string()
+    .email({ message: "Invalid Email format" })
+    .min(1, "Email is required"),
   password: z.string().min(5, { message: "Password minimun length is 5" }),
+});
+
+const LoginSchema = z.object({
+  email: z.string().email({ message: "Invalid Email format" }).min(1,"Email is required"),
+  password: z.string().min(1, { message: "Password is required" }),
 });
 export class User {
   static db = database.collection<RegisterType>("Users");
@@ -52,7 +60,9 @@ export class User {
   }
 
   static async login(body:LoginType){
-    const { byUsername:user } = await this.validateUniqe(body.username,"a");
+    LoginSchema.parse(body);
+
+    const { byEmail:user } = await this.validateUniqe("a",body.email);
     if (!user) {
       throw new HttpError("Invalid Username/Password",400);
     }

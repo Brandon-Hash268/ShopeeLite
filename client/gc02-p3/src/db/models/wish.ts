@@ -1,18 +1,31 @@
 import { ObjectId } from "mongodb";
 import { database } from "../config";
 import { HttpError } from "@/lib/error";
+import { z } from "zod";
 
+const wishListSchema = z.object({
+  userId: z
+    .string()
+    .min(1, "User Id is required"),
+  productId: z.string().min(1, { message: "Product Id is required" }),
+});
 export class Wish {
   static db = database.collection("Wishes");
 
-  static async create(productId:string,userId:string) {
-      const idUser = new ObjectId(userId)
-      const idProduct = new ObjectId(productId)
+  static async create(productId: string, userId: string) {
+    const idUser = new ObjectId(userId);
+    const idProduct = new ObjectId(productId);
+    const wishSchema = { userId,productId}
 
-      const Exist = await this.db.findOne({userId:idUser,productId:idProduct})
-      if (Exist) {
-        throw new HttpError("You've Wishlisted this product",400)
-      }
+    wishListSchema.parse(wishSchema)
+
+    const Exist = await this.db.findOne({
+      userId: idUser,
+      productId: idProduct,
+    });
+    if (Exist) {
+      throw new HttpError("You've Wishlisted this product", 400);
+    }
 
     const wish = {
       userId: new ObjectId(idUser),
@@ -26,11 +39,14 @@ export class Wish {
     // return products;
   }
 
-  static async destroy(productId:string,userId:string) {
+  static async destroy(productId: string, userId: string) {
     const wish = {
       userId: new ObjectId(userId),
       productId: new ObjectId(productId),
     };
+
+    wishListSchema.parse({productId,userId});
+
 
     await this.db.deleteOne(wish);
     // return products;

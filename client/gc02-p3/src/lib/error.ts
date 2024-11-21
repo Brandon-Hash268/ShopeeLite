@@ -12,6 +12,8 @@ export class HttpError extends Error {
 }
 
 export function handlError(error: unknown) {
+  console.log(error);
+  
   if (error instanceof ZodError) {
     return new Response(
       JSON.stringify({ message: error.issues[0].message }),

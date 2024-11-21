@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 export default function Page() {
   const router = useRouter();
   const [user, setUser] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -20,7 +20,7 @@ export default function Page() {
       ...prev,
       [name]: value,
     }));
-    // console.log(user);
+    console.log(user);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -36,7 +36,7 @@ export default function Page() {
       router.push("/");
       window.location.reload();
     } catch (error) {
-      // console.log("🚀 ~ handleSubmit ~ error:", error)
+      console.log("🚀 ~ handleSubmit ~ error:", error)
       if (axios.isAxiosError(error) && error.response) {
         Swal.fire({
           icon: "error",
@@ -68,17 +68,17 @@ export default function Page() {
 
           {/* Form */}
           <form className="space-y-4" onSubmit={handleSubmit}>
-            {/* Username Input */}
+            {/* email Input */}
             <div>
               <label className="block text-gray-700 font-medium mb-2">
-                Username
+                Email
               </label>
               <input
                 type="text"
-                name="username"
-                placeholder="Enter your username"
+                name="email"
+                placeholder="Enter your Email"
                 className="w-full input input-bordered"
-                value={user.username}
+                value={user.email}
                 onChange={handleChange}
               />
             </div>
