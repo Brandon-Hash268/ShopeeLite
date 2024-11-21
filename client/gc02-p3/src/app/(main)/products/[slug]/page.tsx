@@ -17,8 +17,13 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   try {
     product = await getDetailProduct(params.slug);
   } catch (error) {
+    //if i dont somehow use the error it wont let me deploy
+    console.log("🚀 ~ generateMetadata ~ error:", error)
+    // itll redirect so i dont use the error
     redirect("/products");
+    
   }
+
   return {
     title: product.name,
     description: product.excerpt,
@@ -33,6 +38,8 @@ export default async function Page({ params }: Params) {
   try {
     product = await getDetailProduct(params.slug);
   } catch (error) {
+    //if i dont somehow use the error it wont let me deploy
+    console.log("🚀 ~ Page ~ error:", error);
     redirect("/products");
   }
 
