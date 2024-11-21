@@ -1,7 +1,6 @@
 import Image from "next/image";
 import banner from "@/images/shopeeBanner.jpg";
 
-
 export function Banner() {
 
   return (

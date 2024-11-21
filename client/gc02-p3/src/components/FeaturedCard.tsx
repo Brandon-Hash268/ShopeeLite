@@ -1,8 +1,6 @@
-"use sever";
-
 import { product } from "@/type";
 
-export async function FeaturedCard({ product }: { product: product }) {
+export function FeaturedCard({ product }: { product: product }) {
   return (
     <div
       className="card bg-base-100 shadow-xl relative flex flex-col justify-between"
