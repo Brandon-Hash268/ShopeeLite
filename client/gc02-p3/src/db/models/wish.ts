@@ -57,7 +57,6 @@ export class Wish {
   static async findAll(userId:string) {
     const results = await this.db
       .aggregate([
-        // Match stage to filter by userId
         {
           $match: {
             userId: new ObjectId(userId),
@@ -77,6 +76,6 @@ export class Wish {
       ])
       .toArray();
     // console.log(results[0],"aaaaaaaaaa")
-    return results; // Return the aggregation results
+    return results; 
   }
 }

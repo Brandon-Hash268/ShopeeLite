@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
       const wish = await Wish.findAll(userId);
       return Response.json(wish);
     }else{
-      return new HttpError("User Id is required",401)
+      throw new HttpError("User Id is required",401)
     }
     
   } catch (error) {
