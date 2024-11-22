@@ -21,7 +21,7 @@ export async function middleware(request:NextRequest) {
         const secret = new TextEncoder().encode(process.env.JWT_SECRET as string)
         const {payload}= await jose.jwtVerify<{id:string}>(token,secret)
 
-        // console.log(payload,"payloadddddddd");
+        console.log(payload,"payloadddddddd");
         const requestHeaders = new Headers(request.headers)
         requestHeaders.set("x-user-id",payload.id)
         
